@@ -26,9 +26,10 @@
                 <i class="fas fa-camera fa-2x"></i>
             </button>
 
+            <button class="btn btn-secondary" onclick="switchCamera()">
+                <i class="fas fa-sync"></i>
+            </button>
         </div>
-
-
         {{-- Canvas Hidden (Untuk proses capture) --}}
         <canvas id="canvas" style="display:none;"></canvas>
     </div>

@@ -26,6 +26,12 @@
                     <i class="fas fa-camera fa-2x"></i>
                 </button>
 
+                {{-- Tombol Ganti Kamera --}}
+                <button class="btn btn-secondary shadow"
+                        onclick="switchCamera()"
+                        style="width: 50px; height: 50px; border-radius: 50%;">
+                    <i class="fas fa-sync"></i>
+                </button>
             </div>
 
         {{-- Canvas Hidden (Untuk proses capture) --}}

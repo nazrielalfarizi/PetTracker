@@ -38,19 +38,24 @@
 <script>
     // Ambil type dari PHP (Controller)
     // Ambil type langsung dari URL (paling aman)
+    const video = document.getElementById('video-webcam');
+    const canvas = document.getElementById('canvas');
 
     const urlParams = new URLSearchParams(window.location.search);
     const currentType = urlParams.get('type') || localStorage.getItem('report_type') || 'kehilangan';
 
-    // 1. Jalankan Kamera
-    if (navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }) // Menggunakan kamera belakang jika di HP
-            .then(function (stream) {
-                video.srcObject = stream;
-            })
-            .catch(function (error) {
-                alert("Gagal membuka kamera: " + error);
-            });
+    // Jalankan kamera
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({
+            video: { facingMode: { ideal: "environment" } }
+        })
+        .then(function (stream) {
+            video.srcObject = stream;
+        })
+        .catch(function (error) {
+            alert("Gagal membuka kamera: " + error.message);
+            console.error(error);
+        });
     }
 
     function takeSnapshot() {

@@ -140,7 +140,7 @@ class ReportController extends Controller
         }
 
         // default status
-        $data['status'] = 'Aktif';
+        $data['status'] = 'aktif';
 
         $this->reportRepository->createReport($data);
 
@@ -235,7 +235,7 @@ class ReportController extends Controller
         return redirect()->route('user.report.my-report', [
             'status' => 'aktif',
             'type' => $type
-        ]);
+        ])->with('success', 'Laporan berhasil dihapus');
     }
 
     public function updateStatus(string $code)

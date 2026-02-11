@@ -38,9 +38,6 @@
 <script>
     // Ambil type dari PHP (Controller)
     // Ambil type langsung dari URL (paling aman)
-    const video = document.getElementById('video-webcam');
-    const canvas = document.getElementById('canvas');
-
     const urlParams = new URLSearchParams(window.location.search);
     const currentType = urlParams.get('type') || localStorage.getItem('report_type') || 'kehilangan';
 

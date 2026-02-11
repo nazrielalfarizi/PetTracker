@@ -26,12 +26,6 @@
                     <i class="fas fa-camera fa-2x"></i>
                 </button>
 
-                {{-- Tombol Ganti Kamera --}}
-                <button class="btn btn-secondary shadow"
-                        onclick="switchCamera()"
-                        style="width: 50px; height: 50px; border-radius: 50%;">
-                    <i class="fas fa-sync"></i>
-                </button>
             </div>
 
         {{-- Canvas Hidden (Untuk proses capture) --}}
@@ -47,41 +41,16 @@
     const urlParams = new URLSearchParams(window.location.search);
     const currentType = urlParams.get('type') || localStorage.getItem('report_type') || 'kehilangan';
 
-    let currentStream;
-    let useRearCamera = true; // Default kamera belakang
-    const video = document.querySelector("#video-webcam");
-
-    // Fungsi utama untuk menyalakan kamera
-    function startCamera() {
-        // Hentikan stream yang sedang berjalan jika ada
-        if (currentStream) {
-            currentStream.getTracks().forEach(track => track.stop());
-        }
-
-        const constraints = {
-            video: {
-                facingMode: useRearCamera ? "environment" : "user"
-            }
-        };
-
-        navigator.mediaDevices.getUserMedia(constraints)
+    // 1. Jalankan Kamera
+    if (navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }) // Menggunakan kamera belakang jika di HP
             .then(function (stream) {
-                currentStream = stream;
                 video.srcObject = stream;
             })
             .catch(function (error) {
-                alert("Error kamera: " + error);
+                alert("Gagal membuka kamera: " + error);
             });
     }
-
-    // Fungsi untuk pindah kamera
-    function switchCamera() {
-        useRearCamera = !useRearCamera;
-        startCamera();
-    }
-
-    // Jalankan kamera saat pertama kali load
-    startCamera();
 
     function takeSnapshot() {
     const context = canvas.getContext('2d');

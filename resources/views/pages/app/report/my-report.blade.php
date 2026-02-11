@@ -73,7 +73,7 @@
             {{-- ACTION BUTTONS --}}
             <div class="d-flex justify-content-between align-items-center mt-3 gap-2">
                 {{-- Update Status Button --}}
-                @if($report->status === 'Aktif')
+                @if($report->status === 'aktif')
                     <form action="{{ route('user.report.update-status', $report->code) }}" method="POST" class="flex-grow-1 form-selesai">
                         @csrf
                         @method('PATCH')

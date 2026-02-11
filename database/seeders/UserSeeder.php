@@ -5,42 +5,34 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        // Membuat User Contoh sebagai Resident
-        $resident = User::create([
+        // User 1
+        $resident1 = User::create([
             'name'     => 'Nazriel Resident',
             'email'    => 'nazriel@gmail.com',
-            'password' => Hash::make('password'), // Pastikan menggunakan Hash
-        ],
+            'password' => Hash::make('password'),
+        ]);
 
-        [
+        $resident1->assignRole('resident');
+
+        $resident1->resident()->create([
+            'phone_number' => '081234567890',
+        ]);
+
+        // User 2
+        $resident2 = User::create([
             'name'     => 'User Resident',
             'email'    => 'user@gmail.com',
-            'password' => Hash::make('password'), // Pastikan menggunakan Hash
-        ]
-    );
+            'password' => Hash::make('password'),
+        ]);
 
-        // Memberikan role 'resident' (Pastikan RolePermissionSeeder sudah dijalankan sebelumnya)
-        $resident->assignRole('resident');
+        $resident2->assignRole('resident');
 
-        // Jika kamu ingin membuat banyak user secara otomatis (opsional)
-        // User::factory(5)->create()->each(function ($user) {
-        //     $user->assignRole('resident');
-        // });
-        // 2. Berikan Role 'resident'
-
-        $resident->resident()->create([
-            'phone_number' => '081234567890',
-        ],
-        [
+        $resident2->resident()->create([
             'phone_number' => '08871852277',
         ]);
     }

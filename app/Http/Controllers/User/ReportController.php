@@ -221,17 +221,21 @@ class ReportController extends Controller
             abort(403, 'Tidak diizinkan menghapus laporan ini');
         }
 
+        // Simpan type sebelum dihapus
+        $type = $report->type;
 
         // 🗑️ Soft delete laporan
         $report->delete();
 
-         // SweetAlert langsung
+        // SweetAlert
         Swal::toast('Laporan berhasil dihapus.', 'success')
             ->timerProgressBar();
 
-        return redirect()
-            ->route('user.report.my-report')
-            ->with('success', 'Laporan berhasil dihapus.');
+        // Redirect sesuai type laporan
+        return redirect()->route('user.report.my-report', [
+            'status' => 'aktif',
+            'type' => $type
+        ]);
     }
 
     public function updateStatus(string $code)

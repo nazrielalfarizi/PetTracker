@@ -19,7 +19,14 @@ class UserSeeder extends Seeder
             'name'     => 'Nazriel Resident',
             'email'    => 'nazriel@gmail.com',
             'password' => Hash::make('password'), // Pastikan menggunakan Hash
-        ]);
+        ],
+
+        [
+            'name'     => 'User Resident',
+            'email'    => 'user@gmail.com',
+            'password' => Hash::make('password'), // Pastikan menggunakan Hash
+        ]
+    );
 
         // Memberikan role 'resident' (Pastikan RolePermissionSeeder sudah dijalankan sebelumnya)
         $resident->assignRole('resident');
@@ -32,6 +39,9 @@ class UserSeeder extends Seeder
 
         $resident->resident()->create([
             'phone_number' => '081234567890',
+        ],
+        [
+            'phone_number' => '08871852277',
         ]);
     }
 }

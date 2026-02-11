@@ -57,7 +57,7 @@
                         <img src="{{ asset('storage/' . $report->image) }}" alt="" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px;">
                     @endif
 
-                    @if ($report->status === 'Aktif')
+                    @if ($report->status === 'aktif')
                         <div class="badge-status on-process">Aktif</div>
                     @else
                         <div class="badge-status done">Selesai</div>
